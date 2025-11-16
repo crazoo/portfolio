@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sundar's Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #1a1a1a;
+            --accent-color: #4caf50;
+            --accent-color-hover: #45a049;
+            --card-bg: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --heading-font: 'Poppins', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+            --line-height: 1.6;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f5f5f5;
+            --accent-color: #4caf50;
+            --accent-color-hover: #3e8e41;
+            --card-bg: #1e1e1e;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--body-font);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: var(--line-height);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        a:hover {
+            color: var(--accent-color-hover);
+            transform: scale(1.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            background-color: var(--card-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            left: 0;
+            bottom: -3px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .section {
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+
+        .home h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-color-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .home p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent-color);
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--accent-color-hover);
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 1rem auto;
+            list-style: disc inside;
+            font-size: 1rem;
+        }
+
+       /* Projects Section */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* slightly wider min width */
+    gap: 2.5rem; /* increased gap for better spacing */
+    justify-items: center;
+    padding: 2rem 0; /* vertical padding for section */
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    width: 100%;
+    max-width: 320px; /* slightly wider for better look */
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    padding-bottom: 1rem; /* extra padding at bottom for content spacing */
+}
+
+.project-card img {
+    width: 80%;
+    height: 220px; 
+    object-fit: contain; /* shows full image */
+    transition: transform 0.3s ease;
+    background-color: #f1f1f1; /* optional, fills empty space */
+}
+
+
+.project-card h3 {
+    margin: 1rem 1rem 0.5rem 1rem; /* uniform horizontal padding */
+}
+
+.project-card p {
+    padding: 0 1rem 1rem 1rem; /* uniform padding */
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            box-shadow: 0 -4px 10px var(--shadow-color);
+            text-align: center;
+        }
+
+        .social-links a {
+            margin: 0 0.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            background-color: var(--accent-color);
+            color: #fff;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-color-hover);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .home h1 { font-size: 2.2rem; }
+            .projects h2,
+            .about h2,
+            .contact h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Navbar -->
+    <header id="header">
+        <nav class="navbar">
+            <div class="logo">Sundar</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button id="theme-toggle" class="theme-toggle">🌙</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section home">
+        <h1>Hi, I'm Sundar</h1>
+        <p>Professional App & Web Developer</p>
+        <p>
+            I specialize in creating modern, responsive, and interactive applications for web and mobile.  
+            With expertise in HTML, CSS, JavaScript, Flutter, and Firebase, I deliver projects that are both functional and visually stunning.
+        </p>
+        <p>
+            Over the years, I have worked on 5+ full-fledged projects, from business apps to personal portfolios,  
+            focusing on smooth UX, clean code, and scalable architecture.
+        </p>
+        <p>
+            I am passionate about transforming ideas into digital solutions and crafting experiences that delight users on all devices.
+        </p>
+        <a href="#contact" class="download-btn">Get in Touch</a>
+    </section>
+
+    <!-- Projects Section -->
+    
+    <section id="projects" class="section projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <!-- Project Cards -->
+            <div class="project-card">
+                <img src="assets/images/musify_app_logo.jpg" alt="Project 1">
+                <h3>Musify</h3>
+                <p>Your personal music hub! Stream and enjoy your favorite tracks from your own custom backend anytime, anywhere without ads.</p>
+                <a href="https://drive.google.com/uc?export=download&id=15OqNd5p58kSwgBd0upRSohpGb8k-C1Om" target="_blank" class="download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="assets/images/sgram_app_logo.png" alt="Project 2">
+                <h3>Sgram</h3>
+                <p>A fast, secure, and easy-to-use chat app to connect with friends and family instantly. Share messages, media, and stay connected anytime, anywhere.</p>
+                <a href="https://drive.google.com/uc?export=download&id=1AKvk-VSK5w5_NFoD77PxJLsGy7TcHSEr" class="download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="assets/images/edutrack_app_icon.jpg" alt="Project 3">
+                <h3>EduTrack</h3>
+                <p>Your personal exam companion! Track assignments, study schedules, and upcoming college exams effortlessly to stay on top of your academic game.</p>
+                <a href="https://drive.google.com/uc?export=download&id=1VYcPZCKfsrkiTxzMlSbVITBTZMrofAtC" class="download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="assets/images/growsmart_app_logo.png" alt="Project 4">
+                <h3>GrowSmart</h3>
+                <p>AI-powered crop advisor for farmers! Get smart recommendations on what to plant, when to sow, and how to maximize yield.</p>
+                <a href="https://drive.google.com/uc?export=download&id=1czLg0bGIG4jbj0nGZ73nUtj7ciqvQ1ND" target="_blank" class="download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="assets/images/farmzo_app_logo.jpg" alt="Project 5">
+                <h3>Farmzo</h3>
+                <p>Bridging farmers and buyers seamlessly! Discover fresh produce, connect directly, and make secure payments with Razorpay integration.</p>
+                <a href="https://drive.google.com/uc?export=download&id=1cxvLuQITByqpHi0XP58fmFx9dVDT9rgo" target="_blank" class="download-btn">Download</a>
+            </div>
+            <div class="project-card">
+                <img src="assets/images/youtube_app_logo.png" alt="Project 6">
+                <h3>Youtube</h3>
+                <p>Browse and play YouTube videos instantly. Powered by the YouTube Data API for fast search and playback.</p>
+                <a href="https://drive.google.com/uc?export=download&id=1z-jSDMvBx_bsDOID7BhQ_8_YyRvVBKCI" target="_blank" class="download-btn">Download</a>
+            </div>
+        </div>
+                        
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <h2>About Me</h2>
+        <p>
+            I am a passionate developer specializing in Flutter, Web Development, and modern UI/UX design.  
+            I create applications that are not only functional but beautifully designed, ensuring intuitive user experiences.
+        </p>
+        <p>
+            My skill set includes:
+            <ul>
+                <li>Flutter & Dart for cross-platform mobile apps</li>
+                <li>HTML, CSS, JavaScript, React for responsive web apps</li>
+                <li>Firebase & Backend Integration for authentication, database, and real-time updates</li>
+                <li>UI/UX Design Principles for visually stunning and user-friendly interfaces</li>
+            </ul>
+        </p>
+        <p>
+            I constantly strive to learn new technologies and stay up-to-date with the latest trends, delivering projects that exceed expectations.
+        </p>
+        <a href="#contact" class="download-btn">Contact Me</a>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:sundar04official@gmail.com">sundar04official@gmail.com</a></p>
+        <p>Phone: <a href="tel:+918838373947">+918838373947</a></p>
+       <div class="social-links">
+        <a href="https://api.whatsapp.com/send/?phone=%2B919994602039&text&type=phone_number&app_absent=0&wame_ctl=1" target="_blank">WhatsApp</a> |
+        <a href="https://www.instagram.com/sundar_app_dev?igsh=MW5ja2MydHNremNxZA==" target="_blank">Instagram</a> |
+        <a href="https://www.linkedin.com/in/sundar-adava-vigadan-s-ba8a0a366?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Sundar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Light/Dark Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            if (document.body.dataset.theme === 'light') {
+                document.body.dataset.theme = 'dark';
+                themeToggle.textContent = '☀️';
+            } else {
+                document.body.dataset.theme = 'light';
+                themeToggle.textContent = '🌙';
+            }
+        });
+    </script>
+</body>
+</html>
